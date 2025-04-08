@@ -9,13 +9,13 @@ use App\Models\Admin;
 
 class AuthController extends Controller
 {
-    // Show the Admin Registration Form
+    
     public function showAdminRegisterForm()
     {
         return view('auth.admin_register');
     }
 
-    // Register a New Admin
+    
     public function registerAdmin(Request $request)
     {
         $request->validate([
