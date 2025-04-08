@@ -9,18 +9,18 @@ use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends Controller
 {
-    // 🔒 Employee's own dashboard
+    
     public function showDashboard($id = null)
     {
         if ($id) {
-            // Admin is previewing another employee
+            
             $employee = Employee::findOrFail($id);
         } else {
-            // Authenticated employee
+            
             $employee = Auth::guard('employee')->user();
     
             if (!$employee) {
-                // Redirect to employee login instead
+                
                 return redirect()->route('employee.login');
             }
         }
@@ -30,30 +30,29 @@ class EmployeeController extends Controller
         return view('mainemployee.dashboard', compact('clientCount', 'employee'));
     }
     
-    // Admin view of Employee Profile (without authentication as employee)
 public function adminViewProfile($id)
 {
     $employee = Employee::findOrFail($id);
     return view('mainemployee.profile', compact('employee'));
 }
 
-// Admin view of Employee Clients (without authentication as employee)
+
 public function adminViewClients($id)
 {
     $employee = Employee::findOrFail($id);
-    $clients = $employee->clients; // assuming the clients() relationship exists
+    $clients = $employee->clients; 
     return view('mainemployee.clients.index', compact('clients', 'employee'));
 }
 
     
-    // 👤 Employee profile
+
     public function profile()
     {
         $employee = Auth::guard('employee')->user();
         return view('mainemployee.profile', compact('employee'));
     }
 
-    // 👨‍💼 Admin: Show all employees (Employee Table)
+
     public function adminIndex()
     {
         $employees = Employee::all();
@@ -66,7 +65,7 @@ public function adminViewClients($id)
         return view('admin.employees.create');
     }
 
-    // 💾 Admin: Store new employee
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -86,14 +85,14 @@ public function adminViewClients($id)
         return redirect()->route('admin.employees.index')->with('success', 'Employee added successfully!');
     }
 
-    // ✏️ Admin: Edit employee
+    
     public function edit($id)
     {
         $employee = Employee::findOrFail($id);
         return view('admin.employees.edit', compact('employee'));
     }
 
-    // 📝 Admin: Update employee
+    
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -112,7 +111,7 @@ public function adminViewClients($id)
         return redirect()->route('admin.employees.index')->with('success', 'Employee updated successfully!');
     }
 
-    // ❌ Admin: Delete employee
+    
     public function destroy($id)
     {
         $employee = Employee::findOrFail($id);
@@ -121,11 +120,11 @@ public function adminViewClients($id)
         return redirect()->route('admin.employees.index')->with('success', 'Employee deleted successfully.');
     }
 
-    // 👨‍💼 Employee view their assigned clients (employee-side index)
+    
     public function index()
     {
         $employee = auth()->guard('employee')->user();
-        $clients = $employee->clients; // Assumes a clients() relationship
+        $clients = $employee->clients; 
         return view('clients.index', compact('clients'));
     }
 }
