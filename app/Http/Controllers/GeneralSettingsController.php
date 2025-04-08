@@ -8,6 +8,6 @@ class GeneralSettingsController extends Controller
 {
     public function index()
     {
-        return view('admin.settings.index'); // Ensure this view file exists
+        return view('admin.settings.index'); 
     }
 }
