@@ -33,13 +33,12 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'Admin registered successfully.');
     }
 
-    // Show the Login Form
+    
     public function showLoginForm()
     {
         return view('auth.login');
     }
-
-    // Handle Admin Login
+    
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -54,7 +53,7 @@ class AuthController extends Controller
         return back()->with('error', 'Invalid credentials.');
     }
 
-    // Handle Logout
+    
     public function logout()
     {
         Auth::guard('admin')->logout();
