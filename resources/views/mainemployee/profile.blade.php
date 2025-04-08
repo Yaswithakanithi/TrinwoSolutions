@@ -1,4 +1,4 @@
-@extends('layouts.employee') <!-- Ensure this layout exists -->
+@extends('layouts.employee')
 
 @section('content')
     <div class="profile-container">
